@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {HomePage} from './pages/HomePage.jsx';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { NotFound } from './pages/NotFound.jsx';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Check } from "lucide-react";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+  <ToastContainer  position="bottom-right"
+  autoClose={3000}
+  pauseOnFocusLoss
+  draggable
+  pauseOnHover
+  toastClassName="!bg-background !text-foreground !rounded-xl !shadow-lg !border !border-border"
+  bodyClassName="text-sm font-medium"
+  progressClassName="!bg-primary"
+  icon={({ type }) =>
+    type === "success" ? (
+      <span className="text-primary text-lg"><Check/></span>
+    ) : null
+  } />
+    <BrowserRouter>
+    <Routes>
+      <Route index element={<HomePage />} />
+      <Route path="*" element={< NotFound/>} />
+    </Routes>
+    </BrowserRouter>
+    </>
   );
+ 
 }
 
 export default App;
